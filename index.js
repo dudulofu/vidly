@@ -5,6 +5,9 @@ const genres = require('./routes/genres');
 const customers = require('./routes/customers');
 const mongoose = require('mongoose');
 
+//*heroku
+const {Genre, validate} = require('./models/genre.js');
+
 
 app.use(express.json());
 app.use('/api/genres', genres);
@@ -24,3 +27,8 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
     var time = new Date(); console.log(`Port ${port}-${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`);
 }); 
+
+app.get('/', async (req, res) => {
+    console.log(1111111);
+    res.send(await Genre.find());
+});
